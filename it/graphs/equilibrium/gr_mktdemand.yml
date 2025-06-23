@@ -140,7 +140,7 @@ layout:
 
     sidebar:
       controls:
-      - title: Domanda individuale e di mercato per un bene perfettamente divisibile
+      - title: Domanda individuale e di mercato per un bene divisibile
         # checkboxes:
         # - param: showCS
         #   label: "\\text{Mostra e calcola surplus dei consumatori.}"
