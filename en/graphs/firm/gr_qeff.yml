@@ -98,7 +98,7 @@ layout:
 
     sidebar:
       controls:
-      - title: Costo medio minimo e scala efficiente di produzione
+      - title: Minimum Average Cost and Efficient Scale of Production
         sliders:
         - param: a
           label: A

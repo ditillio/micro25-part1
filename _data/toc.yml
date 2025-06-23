@@ -53,8 +53,8 @@ parts:
               en: Firm's Optimal Choice
               it: Scelta ottima dell'impresa
           - title:
-              en: Price-Taking Firms' Supply
-              it: Offerta delle imprese price-taker
+              en: Price-Taking Firm's Supply
+              it: Offerta dell'impresa price-taker
       - folder: 4
         title:
           en: Equilibrium in Competitive Markets

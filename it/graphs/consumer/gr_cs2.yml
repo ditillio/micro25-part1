@@ -33,7 +33,7 @@ calcs:
 
   deltaCS: (calcs.s1)*(params.m)*log((params.p1new)/(params.p1))
 
-
+  maxXnew: (params.m)/(params.p1new)
 
 
 layout:
@@ -109,7 +109,7 @@ layout:
       - Point:
           coordinates: [(params.m)/(params.p1new), 0]
           droplines:
-            vertical: (params.m)/(params.p1new)
+            vertical: calcs.maxXnew.toFixed(2)
           strokeWidth: 0.5
           color: grey
           r: 0

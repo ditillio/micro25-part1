@@ -737,8 +737,9 @@ layout:
                        utility level $U=${calcs.uold.toFixed(0)}$.
                       The compensating  variation  equals the area to the left of  
                       the curve $X^C_{${calcs.uold}}$. 
-                      We will discuss the concept of  compensated demand, and explain this equality, 
-                      at the end of this section.
+                      A deeper discussion on the concept of compensated demand, and a precise
+                       explanation for this equality, would go beyond the scope of these notes, so
+                       we omit the arguments.
                     `"
             show: calcs.scheck == 0 && params.showCVEV == 1
 
@@ -757,9 +758,10 @@ layout:
                       consumer <i>would</i> demand if he had just enough income to achieve
                        utility level $U=${calcs.unew.toFixed(0)}$.
                       The equivalent  variation  equals the area to the left of  
-                      the curve $X^C_{${calcs.unew}}$. 
-                      We will discuss the concept of  compensated demand, and explain this equality, 
-                      at the end of this section.
+                      the curve $X^C_{${calcs.unew}}$.
+                      A deeper discussion on the concept of compensated demand, and a precise
+                       explanation for this equality, would go beyond the scope of these notes, so
+                       we omit the arguments.
                     `"
             show: calcs.tcheck.toFixed(0) == 0 && params.showCVEV == 2
 

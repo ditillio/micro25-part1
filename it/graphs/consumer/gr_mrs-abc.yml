@@ -398,12 +398,13 @@ layout:
     leftControls:
       title: Alice ( 𝛼 = 1, 𝛽 = 1, 𝜎 = 0 )
       divs:
+      - html: "` La funzione di utilità di Alice è $U=XY$. `"
       - html: "` Trascinare i panieri $A$ e $B$ per vedere quale è preferito da Alice. `"
-      - html: "` Alice è indifferente tra $A$ e $B$. `"
+      - html: "` Alice è indifferente tra $A$ e $B$: `"
         show: calcs.ua == calcs.uaa
-      - html: "` Alice preferisce $A$ a $B$. `"
+      - html: "` Alice preferisce $A$ a $B$: `"
         show: calcs.ua > calcs.uaa
-      - html: "` Alice preferisce $B$ ad $A$. `"
+      - html: "` Alice preferisce $B$ ad $A$: `"
         show: calcs.ua < calcs.uaa
       - html: "` $U(${params.x1a},${params.x2a})=${params.x1a} \\\\times ${params.x2a} = ${calcs.ua}$ `"
       - html: "` $U(${params.x1aa},${params.x2aa})=${params.x1aa} \\\\times ${params.x2aa} = ${calcs.uaa}$ `"
@@ -411,12 +412,13 @@ layout:
     middleControls:
       title: Bruno ( 𝛼 = 2, 𝛽 = 1, 𝜎 = 0 )
       divs:
+      - html: "` La funzione di utilità di Bruno è $U=X^2Y$. `"
       - html: "` Trascinare i panieri $A$ e $B$ per vedere quale Bruno preferisce. `"
-      - html: "` Bruno è indifferente tra $A$ e $B$. `"
+      - html: "` Bruno è indifferente tra $A$ e $B$: `"
         show: calcs.ub == calcs.ubb
-      - html: "` Bruno preferisce $A$ a $B$. `"
+      - html: "` Bruno preferisce $A$ a $B$: `"
         show: calcs.ub > calcs.ubb
-      - html: "` Bruno preferisce $B$ ad $A$. `"
+      - html: "` Bruno preferisce $B$ ad $A$: `"
         show: calcs.ub < calcs.ubb
       - html: "` $U(${params.x1b},${params.x2b})=${params.x1b}^2 \\\\times ${params.x2b} = ${calcs.ub}$ `"
       - html: "` $U(${params.x1bb},${params.x2bb})=${params.x1bb}^2 \\\\times ${params.x2bb} = ${calcs.ubb}$ `"
@@ -424,12 +426,13 @@ layout:
     rightControls:
       title: Carmen ( 𝛼 = 1, 𝛽 = 1, 𝜎 = 5 )
       divs:
+      - html: "` La funzione di utilità di Carmen è $U=(X+5)(Y+5)$. `"
       - html: "` Trascinare i panieri $A$ e $B$ per vedere quale Carmen preferisce. `"
-      - html: "` Carmen è indifferente tra $A$ e $B$. `"
+      - html: "` Carmen è indifferente tra $A$ e $B$: `"
         show: calcs.uc == calcs.ucc
-      - html: "` Carmen preferisce $A$ a $B$. `"
+      - html: "` Carmen preferisce $A$ a $B$: `"
         show: calcs.uc > calcs.ucc
-      - html: "` Carmen preferisce $B$ ad $A$. `"
+      - html: "` Carmen preferisce $B$ ad $A$: `"
         show: calcs.uc < calcs.ucc
       - html: "` $U(${params.x1c},${params.x2c})=(${params.x1c}+${params.s}) 
                     \\\\times (${params.x2c}+${params.s}) = ${calcs.uc}$ `"

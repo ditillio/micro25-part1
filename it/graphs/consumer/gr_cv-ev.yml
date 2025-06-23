@@ -735,9 +735,9 @@ layout:
                       quanto serve per raggiungere
                       un livello di utilità pari a $U=${calcs.uold.toFixed(0)}$.
                       La variazione compensativa è uguale all'area a sinistra della 
-                      curva $X^C_{${calcs.uold}}$. 
-                      Approfondiremo il concetto di domanda compensata e spiegheremo questa
-                      uguaglianza alla fine di questa  sezione.
+                      curva $X^C_{${calcs.uold}}$.
+                      Omettiamo di approfondire il concetto di domanda compensata e spiegare quest'ultima
+                      uguaglianza perché ciò ci porterebbe oltre gli scopi di queste note.
                     `"
             show: calcs.scheck == 0 && params.showCVEV == 1
 
@@ -756,9 +756,10 @@ layout:
                       consumatore <i>domanderebbe</i> se avesse esattamente tanto reddito
                       quanto serve per raggiungere
                       un livello di utilità pari a $U=${calcs.unew.toFixed(0)}$.
-                      La variazione equivalente è uguale all'area a sinistra della curva $X^C_{${calcs.unew}}$. 
-                      Approfondiremo il concetto di domanda compensata e spiegheremo questa
-                      uguaglianza alla fine di questa sezione.
+                      La variazione equivalente è uguale all'area a sinistra della curva
+                      $X^C_{${calcs.unew}}$. 
+                      Omettiamo di approfondire il concetto di domanda compensata e spiegare quest'ultima
+                      uguaglianza perché ciò ci porterebbe oltre gli scopi di queste note.
                     `"
             show: calcs.tcheck.toFixed(0) == 0 && params.showCVEV == 2
 
