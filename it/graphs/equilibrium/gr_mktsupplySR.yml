@@ -2,9 +2,9 @@ params:
 
 - {name: a, value: 80, min: 40, max: 100, round: 10}
 - {name: w, value: 64, min: 40, max: 80}
-- {name: p, value: 2.5, min: 0.5, max: 5, round: 0.05}
+- {name: p, value: 3, min: 0.5, max: 5, round: 0.05}
 - {name: fc, value: 100, min: 50, max: 200, round: 10}
-- {name: n, value: 60, min: 40, max: 110, round: 10}
+- {name: n, value: 20, min: 10, max: 40, round: 5}
 
 calcs:
   xopt: ( params.a * params.a / ( 2 * params.w ) ) * params.p
@@ -18,6 +18,10 @@ calcs:
   atc: calcs.xopt / 100 + (params.fc) / calcs.xopt
   mktsupply: (params.n)*(calcs.xopt)
   acmin: (2)*(sqrt((params.fc)*(params.w)))/(params.a)
+
+  mcslope: (2)*(params.w)/((params.a)*(params.a))
+  supplyslope: (1)/(calcs.mcslope)
+  mktsupplyslope: (params.n)*(calcs.supplyslope)
 
 aspectRatio: 2
 
@@ -60,7 +64,7 @@ layout:
               text: P
               x: 210
               position: l
-            strokeWidth: 1.5
+            strokeWidth: 1
             bgcolor: none
             drag:
               - vertical: p
@@ -100,7 +104,7 @@ layout:
 
     rightGraph: 
       xAxis:
-        max: 14000
+        max: 8000
         min: -3
         ticks: 4
       yAxis:
@@ -111,7 +115,7 @@ layout:
       objects:
 
         - Label:
-                coordinates: [14000, 0]
+                coordinates: [8000, 0]
                 text: "` \\\\text{kg} `"
         - Label:
                 coordinates: [0, 6]
@@ -132,9 +136,9 @@ layout:
             color: Green
             label:
               text: P
-              x: 14000
+              x: 8000
               position: l
-            strokeWidth: 1.5
+            strokeWidth: 1
             bgcolor: none
             drag:
               - vertical: p
@@ -145,7 +149,7 @@ layout:
             color: Red
             label:
               text: S_{SR}
-              x: 14000  
+              x: min(8000,(300)*(params.n))  
             strokeWidth: 2
 
 
@@ -175,4 +179,20 @@ layout:
 
     explanation:
       divs:
-        - html: "` bla  `"
+        - html: "`
+                Il mercato della pasta è popolato nel breve periodo da ${params.n} imprese identiche.
+                La funzione di produzione è $Q=${params.a}\\\\sqrt{L}$ e il salario è $W=${params.w}$.
+                La funzione di costo marginale è quindi $MC=${calcs.mcslope.toFixed(2)}Q$.
+                Da ciò segue che la funzione di offerta individuale è
+                $Q=${calcs.supplyslope.toFixed(2)}P$ (curva $S^i_{SR}$ nel grafico di sinistra).
+                La quantità complessivamente offerta è pari a ${params.n} per la
+                quantità offerta da ciascuna impresa. La funzione di offerta di
+                mercato di breve periodo (curva $S_{SR}$ nel grafico di destra) è quindi
+                $$
+                Q=${params.n}\\\\times ${calcs.supplyslope.toFixed(2)} P
+                =
+                ${calcs.mktsupplyslope.toFixed(2)} P
+                \\\\qquad\\\\text{ovvero}\\\\qquad
+                P=Q/${calcs.mktsupplyslope.toFixed(2)}
+                $$ 
+                `"

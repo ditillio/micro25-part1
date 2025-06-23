@@ -2,9 +2,9 @@ params:
 
 - {name: a, value: 80, min: 40, max: 100, round: 10}
 - {name: w, value: 64, min: 40, max: 80}
-- {name: p, value: 2.5, min: 0.5, max: 5, round: 0.05}
+- {name: p, value: 3, min: 0.5, max: 5, round: 0.05}
 - {name: fc, value: 100, min: 50, max: 200, round: 10}
-- {name: n, value: 60, min: 40, max: 110, round: 10}
+- {name: n, value: 20, min: 10, max: 40, round: 5}
 
 calcs:
   xopt: ( params.a * params.a / ( 2 * params.w ) ) * params.p
@@ -18,6 +18,10 @@ calcs:
   atc: calcs.xopt / 100 + (params.fc) / calcs.xopt
   mktsupply: (params.n)*(calcs.xopt)
   acmin: (2)*(sqrt((params.fc)*(params.w)))/(params.a)
+
+  mcslope: (2)*(params.w)/((params.a)*(params.a))
+  supplyslope: (1)/(calcs.mcslope)
+  mktsupplyslope: (params.n)*(calcs.supplyslope)
 
 aspectRatio: 2
 
@@ -60,7 +64,7 @@ layout:
               text: P
               x: 210
               position: l
-            strokeWidth: 1.5
+            strokeWidth: 1
             bgcolor: none
             drag:
               - vertical: p
@@ -100,7 +104,7 @@ layout:
 
     rightGraph: 
       xAxis:
-        max: 14000
+        max: 8000
         min: -3
         ticks: 4
       yAxis:
@@ -111,7 +115,7 @@ layout:
       objects:
 
         - Label:
-                coordinates: [14000, 0]
+                coordinates: [8000, 0]
                 text: "` \\\\text{kg} `"
         - Label:
                 coordinates: [0, 6]
@@ -132,9 +136,9 @@ layout:
             color: Green
             label:
               text: P
-              x: 14000
+              x: 8000
               position: l
-            strokeWidth: 1.5
+            strokeWidth: 1
             bgcolor: none
             drag:
               - vertical: p
@@ -145,9 +149,8 @@ layout:
             color: Red
             label:
               text: S_{SR}
-              x: 14000  
+              x: min(8000,(300)*(params.n))  
             strokeWidth: 2
-
 
 
 
@@ -156,7 +159,7 @@ layout:
 
     sidebar:
       controls:
-      - title: Offerta individuale e di mercato nel breve periodo
+      - title: Individual and Market Supply in the Short Run
         sliders:
         - param: a
           label: A
@@ -165,14 +168,30 @@ layout:
         - param: fc
           label: FC
         - param: n
-          label: \text{num. imp.}
+          label: \text{num. firms}
         - param: p
           label: P
         divs:
-        - html: "` Quando $P = ${params.p.toFixed(2)}$ la quantità offerta da ciascuna delle ${params.n}
-                    imprese presenti sul mercato nel breve periodo è ${calcs.xopt.toFixed(2)}.
-                    La quantità offerta dal mercato è quindi ${calcs.mktsupply.toFixed(0)}.  `"
+        - html: "` When $P = ${params.p.toFixed(2)}$, the quantity supplied by each of the ${params.n}
+                  firms in the short-run market is ${calcs.xopt.toFixed(2)}.
+                  The total quantity supplied in the market is therefore ${calcs.mktsupply.toFixed(0)}. `"
 
     explanation:
       divs:
-        - html: "` bla  `"
+        - html: "`
+                The pasta market is populated in the short run by ${params.n} identical firms.
+                The production function is $Q=${params.a}\\\\sqrt{L}$ and the wage is $W=${params.w}$.
+                The marginal cost function is therefore $MC=${calcs.mcslope.toFixed(2)}Q$.
+                From this, the individual supply function is
+                $Q=${calcs.supplyslope.toFixed(2)}P$ (curve $S^i_{SR}$ in the graph on the left).
+                The total quantity supplied is equal to ${params.n} times the
+                quantity supplied by each firm. The short-run market supply function
+                (curve $S_{SR}$ in the graph on the right) is therefore
+                $$
+                Q=${params.n}\\\\times ${calcs.supplyslope.toFixed(2)} P
+                =
+                ${calcs.mktsupplyslope.toFixed(2)} P
+                \\\\qquad\\\\text{that is}\\\\qquad
+                P=Q/${calcs.mktsupplyslope.toFixed(2)}
+                $$ 
+                `"
