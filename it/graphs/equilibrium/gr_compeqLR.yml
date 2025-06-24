@@ -274,6 +274,15 @@ layout:
             r: 5
 
 
+# market demand
+        - Curve:
+            fn: (5)-(x)/(params.numcons)
+            color: Blue
+            strokeWidth: 1.5
+            label:
+              text: D
+              x: (params.numcons)*(4.6)
+              position: l
 
 
 

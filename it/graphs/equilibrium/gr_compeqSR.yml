@@ -7,7 +7,7 @@ params:
 - {name: w, value: 64, min: 40, max: 80}
 - {name: p, value: 2.5, min: 0.5, max: 5, round: 0.05}
 - {name: fc, value: 100, min: 50, max: 200, round: 10}
-- {name: n, value: 20, min: 10, max: 40, round: 5}
+- {name: numimp, value: 20, min: 10, max: 40, round: 5}
 
 calcs:
 
@@ -20,10 +20,10 @@ calcs:
   avc: (calcs.xopt) / 100
   atc: calcs.xopt / 100 + (params.fc) / calcs.xopt
 
-  mktsupply: (params.n)*(calcs.xopt)
+  mktsupply: (params.numimp)*(calcs.xopt)
   acmin: (2)*(sqrt((params.fc)*(params.w)))/(params.A)
 
-  eqQ: (params.a)/(((2)*(params.w))/((params.n)*((params.A)^2))+(params.b))
+  eqQ: (params.a)/(((2)*(params.w))/((params.numimp)*((params.A)^2))+(params.b))
   eqP: (params.a)-(params.b)*(calcs.eqQ)
 
   xopt: ( params.A * params.A / ( 2 * params.w ) ) * calcs.eqP
@@ -78,7 +78,7 @@ layout:
             fn: ( 2 * params.w / ( params.A * params.A ) ) * (x)
             color: Red
             label:
-              text: S^{\, \text i}_{SR}
+              text: S^{\, \text i}
               x: 210
             strokeWidth: 2
 
@@ -151,10 +151,10 @@ layout:
 
 # market supply curve
         - Curve:
-            fn: ( 2 * params.w / ( params.A * params.A ) ) * ((x)/(params.n))
+            fn: ( 2 * params.w / ( params.A * params.A ) ) * ((x)/(params.numimp))
             color: Red
             label:
-              text: S_{SR}
+              text: S
               x: 5000
             strokeWidth: 2
 
@@ -185,12 +185,12 @@ layout:
           label: W
         - param: fc
           label: FC
-        - param: n
+        - param: numimp
           label: \text{num. imp.}
         - param: p
           label: P
         divs:
-        - html: "` Quando $P = ${params.p.toFixed(2)}$ la quantità offerta da ciascuna delle ${params.n}
+        - html: "` Quando $P = ${params.p.toFixed(2)}$ la quantità offerta da ciascuna delle ${params.numimp}
                     imprese presenti sul mercato nel breve periodo è ${calcs.xopt.toFixed(2)}.
                     La quantità offerta dal mercato è quindi ${calcs.mktsupply.toFixed(0)}.  `"
 
