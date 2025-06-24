@@ -210,8 +210,8 @@ layout:
         - html: "`  `"
         - html: "`  `"
         - html: "`  `"
-        - html: "` The production function is $Q=F(L)=80\\\\sqrt{L}$. `"
-        - html: "` Average product is therefore $AP_L=F(L)/L=80 / \\\\sqrt{L}$. `"
+        - html: "` The production function is $Q=80\\\\sqrt{L}$. `"
+        - html: "` Average product is therefore $AP_L=80 / \\\\sqrt{L}$. `"
         - html: "` The minimum quantity of labor that the firm can hire is one unit, i.e. one day.
                   If the firm hires one unit of labor, average product is
                   $$ \\\\frac{80}{1}=80, $$

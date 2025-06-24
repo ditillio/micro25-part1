@@ -210,8 +210,8 @@ layout:
         - html: "`  `"
         - html: "`  `"
         - html: "`  `"
-        - html: "` La funzione di produzione è $Q=F(L)=80\\\\sqrt{L}$. `"
-        - html: "` Il prodotto medio è quindi $AP_L=F(L)/L=80 / \\\\sqrt{L}$. `"
+        - html: "` La funzione di produzione è $Q=80\\\\sqrt{L}$. `"
+        - html: "` Il prodotto medio è quindi $AP_L=80 / \\\\sqrt{L}$. `"
         - html: "` La quantità minima di lavoro che l'impresa può
                   utilizzare è una giornata.
                   Se l'impresa impiega una giornata, il prodotto medio è

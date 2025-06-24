@@ -4,7 +4,7 @@ params:
 - {name: op2, value: 0.1}
 - {name: ops, value: 0.2}
 - {name: x, value: 120, min: 0, max: 200}
-- {name: a, value: 80, min: 60, max: 100, round: 5}
+- {name: A, value: 80, min: 60, max: 100, round: 5}
 - {name: alpha, value: 0.5, min: 0.5, max: 1, round: 0.5}
 - {name: w, value: 64, min: 40, max: 80, round: 1}
 - {name: fc, value: 100, min: 0, max: 200, round: 5}
@@ -12,7 +12,7 @@ params:
 - {name: maxlabor, value: 12}
 
 calcs:
-  l: ((params.x)/(params.a))^(1/(params.alpha))
+  l: ((params.x)/(params.A))^(1/(params.alpha))
   vc: params.w * calcs.l
   tc: params.w * calcs.l + params.fc
   aaa: (params.alpha)^(-1)
@@ -55,11 +55,11 @@ layout:
 
 # inverse production function (quadratic)
         - Curve:
-            fn: ( (x) / (params.a) )^(calcs.aaa)
+            fn: ( (x) / (params.A) )^(calcs.aaa)
             color: Blue
             label:
-              text: "` L = { \\\\dfrac{1}{ ${params.a}^2} } Q^2 `"
-              x: min((params.a)*sqrt(params.maxlabor ),210)
+              text: "` L = { \\\\dfrac{1}{ ${params.A}^2} } Q^2 `"
+              x: min((params.A)*sqrt(params.maxlabor ),210)
               position: tl
             strokeWidth: 1.7
             max: 205
@@ -67,10 +67,10 @@ layout:
 
 # inverse production function (linear)
         - Curve:
-            fn: ( (x) / (params.a) )^(calcs.aaa)
+            fn: ( (x) / (params.A) )^(calcs.aaa)
             color: Blue
             label:
-              text: "` L = ( 1 / ${params.a} ) Q `"
+              text: "` L = ( 1 / ${params.A} ) Q `"
               x: 200  
               position: c
             strokeWidth: 1.7
@@ -112,11 +112,11 @@ layout:
 # VC (quadratic)
 
         - Curve:
-            fn: params.w * ( (x) / (params.a) ) ^ 2
+            fn: params.w * ( (x) / (params.A) ) ^ 2
             color: Darkorange
             label:
-              text: "` VC(Q) = \\\\dfrac{ ${params.w} }{ ${params.a}^2 } Q^2 `"
-              x: min((params.a)*sqrt((params.maxcost)/(params.w)),190)
+              text: "` VC(Q) = \\\\dfrac{ ${params.w} }{ ${params.A}^2 } Q^2 `"
+              x: min((params.A)*sqrt((params.maxcost)/(params.w)),190)
               position: tl
             strokeWidth: 1.7
             max: 210
@@ -125,10 +125,10 @@ layout:
 # VC (linear)
 
         - Curve:
-            fn: params.w * ( (x) / (params.a) )
+            fn: params.w * ( (x) / (params.A) )
             color: Darkorange
             label:
-              text: "` VC(Q) = ( ${params.w} / ${params.a} ) Q `"
+              text: "` VC(Q) = ( ${params.w} / ${params.A} ) Q `"
               x: 200
               position: c
             strokeWidth: 1.7
@@ -137,11 +137,11 @@ layout:
 # TC (quadratic)
 
         - Curve:
-            fn: params.w * ( (x) / (params.a) ) ^ 2 + params.fc
+            fn: params.w * ( (x) / (params.A) ) ^ 2 + params.fc
             color: Brown
             label:
-              text: "` C(Q) = ${params.fc} + \\\\dfrac{ ${params.w} }{ ${params.a}^2 } Q^2 `"
-              x: min((params.a)*sqrt((params.maxcost-(params.fc))/(params.w)),200)
+              text: "` C(Q) = ${params.fc} + \\\\dfrac{ ${params.w} }{ ${params.A}^2 } Q^2 `"
+              x: min((params.A)*sqrt((params.maxcost-(params.fc))/(params.w)),200)
               position: br
               bgcolor: none
             strokeWidth: 1.7
@@ -151,11 +151,11 @@ layout:
 # TC=VC with FC=0 (quadratic)
 
         - Curve:
-            fn: params.w * ( (x) / (params.a) ) ^ 2 + params.fc
+            fn: params.w * ( (x) / (params.A) ) ^ 2 + params.fc
             color: brown
             label:
-              text: "` C(Q) = VC(Q) = \\\\dfrac{ ${params.w} }{ ${params.a}^2 } Q^2 `"
-              x: min((params.a)*sqrt((params.maxcost-(params.fc))/(params.w)),200)
+              text: "` C(Q) = VC(Q) = \\\\dfrac{ ${params.w} }{ ${params.A}^2 } Q^2 `"
+              x: min((params.A)*sqrt((params.maxcost-(params.fc))/(params.w)),200)
               position: c
             strokeWidth: 1.7
             max: 210
@@ -164,10 +164,10 @@ layout:
 # TC (linear)
 
         - Curve:
-            fn: params.w * ( (x) / (params.a) ) + params.fc
+            fn: params.w * ( (x) / (params.A) ) + params.fc
             color: Brown
             label:
-              text: "` C(Q) = ${params.fc} + ( ${params.w} / ${params.a} ) Q `"
+              text: "` C(Q) = ${params.fc} + ( ${params.w} / ${params.A} ) Q `"
               x: 200  
               position: c
             strokeWidth: 1.7
@@ -193,7 +193,7 @@ layout:
       controls:
       - title: Dalla produzione ai costi
         sliders:
-        - param: a
+        - param: A
           label: A
         - param: fc
           label: FC
@@ -207,33 +207,18 @@ layout:
         - html: "` `"
         - html: "` `"
         - html: "` `"
-        - html: "` La funzione di produzione è $Q=${params.a}L^{0.5}$. 
-                   La funzione di produzione inversa è quindi $L=(1/{${params.a}}^2)Q^2$. `"
-          show: params.alpha == 0.5
+        - html: "` La funzione di produzione è $Q=${params.A}\\\\sqrt{L}$. 
+                   La funzione di produzione inversa è quindi $L=Q^2/{${params.A}}^2$. `"
         - html: "` Per produrre $ Q = ${params.x.toFixed(0)} $  sono perciò necessarie
-                   $$ L = (1/{${params.a}}^2) {${params.x.toFixed(0)}}^2 = ${calcs.l.toFixed(2)} $$
+                   $$ L = (1/{${params.A}}^2) {${params.x.toFixed(0)}}^2 = ${calcs.l.toFixed(2)} $$
                    giornate di lavoro. `"
-          show: params.alpha == 0.5
-        - html: "` La funzione di produzione è $ Q = ${params.a} L$.  
-                  La funzione di produzione inversa è quindi $L=(1/{${params.a}})Q$. `"
-          show: params.alpha == 1
-        - html: "` Per produrre $ Q = ${params.x.toFixed(0)} $  sono perciò necessarie
-                   $$ L = (1/{${params.a}}) {${params.x.toFixed(0)}} = ${calcs.l.toFixed(2)} $$
-                   giornate di lavoro. `"
-          show: params.alpha == 1
         - html: "` `"
         - html: "` `"
         - html: "` `"
-        - html: "` Sapendo che il salario giornaliero è $W=${params.w}$, possiamo calcolare
-                   il costo variabile dell'impresa:
-                  $$ VC(${params.x.toFixed(0)}) = \\\\frac{ ${params.w} }{ ${params.a} ^2 } ${params.x.toFixed(0)} ^2 
+        - html: "` Dato che il salario giornaliero è $W=${params.w}$, 
+                   il costo variabile dell'impresa è:
+                  $$ VC(${params.x.toFixed(0)}) = \\\\frac{ ${params.w} }{ ${params.A} ^2 } ${params.x.toFixed(0)} ^2 
                   = ${calcs.vc.toFixed(2)}. $$  `"
-          show: params.alpha == 0.5
-        - html: "` Sapendo che il salario giornaliero è $W=${params.w}$, possiamo calcolare
-                   il costo variabile dell'impresa:
-                  $$ VC(${params.x.toFixed(0)}) = \\\\frac{ ${params.w} }{ ${params.a} } ${params.x.toFixed(0)} 
-                  = ${calcs.vc.toFixed(2)}. $$  `"
-          show: params.alpha == 1
         - html: "` `"
         - html: "` `"
         - html: "` `"
@@ -242,4 +227,3 @@ layout:
                   calcolare il costo totale:
                   $$ C(${params.x.toFixed(0)}) = ${params.fc} + ${calcs.vc.toFixed(2)} = ${calcs.tc.toFixed(2)}. $$
                    `"
-          show: params.alpha > 0
