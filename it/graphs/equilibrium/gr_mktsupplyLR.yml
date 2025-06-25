@@ -48,7 +48,7 @@ layout:
         ticks: 0
       yAxis:
         max: 5.5
-        ticks: 0
+        ticks: 10
       label: a
 
       objects:
@@ -204,7 +204,7 @@ layout:
       xAxis:
         max: 5000
         min: -50
-        ticks: 4
+        ticks: 0
       yAxis:
         max: 5.5
         ticks: 10
@@ -308,8 +308,15 @@ layout:
             color: Red
             r: 4.5
             droplines:
-              vertical: 0.00
+              vertical: 0
             show: params.p.toFixed(2) == calcs.acmin.toFixed(2)
+        - Point:
+            coordinates: [calcs.mktsupply, params.p]
+            color: Red
+            r: 4.5
+            droplines:
+              vertical: calcs.mktsupply.toFixed(2)
+            show: params.p.toFixed(2) == calcs.acmin.toFixed(2) && calcs.nnn < 30
 
         - Points: {coordinates: [[0,calcs.acmin],[calcs.qeff,calcs.acmin],[(2)*(calcs.qeff),calcs.acmin],[(3)*(calcs.qeff),calcs.acmin],[(4)*(calcs.qeff),calcs.acmin],[(5)*(calcs.qeff),calcs.acmin],[(6)*(calcs.qeff),calcs.acmin],[(7)*(calcs.qeff),calcs.acmin],[(8)*(calcs.qeff),calcs.acmin],[(9)*(calcs.qeff),calcs.acmin],[(10)*(calcs.qeff),calcs.acmin]], color: Red, r: 4, show: params.p.toFixed(2) == calcs.acmin.toFixed(2)}
         - Point: {coordinates: [(11)*(calcs.qeff),calcs.acmin], color: Red, r: 4, show: calcs.nnn >= 11 && params.p.toFixed(2) == calcs.acmin.toFixed(2)}
@@ -398,12 +405,13 @@ layout:
       controls:
       - title: Offerta Individuale e di Mercato nel Lungo Periodo
 
+
         radioGroup:
           param: maxfirms
           options:
-            - 10
-            - 20
-            - ∞
+            - 10 potenziali imprese
+            - 20 potenziali imprese
+            - ∞ potenziali imprese
 
         sliders:
         - param: p
@@ -416,6 +424,80 @@ layout:
 
     explanation:
       divs:
-        - html: "`   `"
+        - html: "` Se il numero massimo di imprese che possono entrare nel 
+                  mercato fosse solo ${calcs.nnn}, la curva di offerta di mercato di lungo periodo
+                  sarebbe la curva $S^{${calcs.nnn}}_{LR}$ nel grafico di destra, somma
+                  orizzontale di ${calcs.nnn} curve individuali come quella rappresentata nel
+                  grafico di sinistra (curva $S^i_{LR}$). La quantità offerta è zero per prezzi minori
+                  del costo medio minimo e pari a ${calcs.nnn} volte la quantità ottima della singola 
+                  impresa per prezzi superiori ad esso. Se il prezzo è
+                  esattamente pari al costo medio minimo, allora la quantità offerta è un 
+                  multiplo della scala efficiente di produzione (i punti che formano il tratto
+                  orizzontale della curva $S^{${calcs.nnn}}_{LR}$ distano esattamente $Q^{\\\\text{eff}}$ l'uno dall'altro)
+                  `"
+          show: calcs.nnn < 30
+
+        - html: "` Con un numero potenzialmente infinito di imprese,
+                  la curva di offerta di mercato di lungo periodo
+                  è una retta orizzontale in corrispondenza 
+                  del costo medio minimo. Più precisamente, la quantità offerta è zero per prezzi minori
+                  del costo medio minimo e infinita per prezzi superiori ad esso. Se il prezzo è
+                  esattamente pari al costo medio minimo, allora la quantità offerta è un qualuque
+                  multiplo della scala efficiente di produzione (i punti che formano il tratto
+                  orizzontale della curva S_{LR} distano esattamente $Q^{\\\\text{eff}}$ l'uno dall'altro). 
+                  `"
+          show: calcs.nnn >= 30
+
+
+        - html: "`
+                  Dato che $AC_{\\\\text{min}}=${calcs.acmin}$, se il prezzo di mercato
+                  è $P=${params.p.toFixed(2)}$ abbiamo $P < AC_{\\\\text{min}}$ e quindi nessuna delle
+                  imprese potenziali è disposta a entrare nel mercato.
+                  La quantità offerta nel lungo periodo è zero.
+                  `"
+          show: params.p.toFixed(2) < calcs.acmin.toFixed(2)
+
+        - html: "`
+                  Dato che $AC_{\\\\text{min}}=${calcs.acmin}$, se il prezzo di mercato
+                  è $P=${params.p.toFixed(2)}$ abbiamo $P > AC_{\\\\text{min}}$ e quindi tutte
+                  vorranno entrare nel mercato e produrre una quantità positiva.
+                  La quantità offerta nel lungo periodo è ${calcs.nnn} volte la quantità
+                  che massimizza il profitto della singola impresa.
+                  `"
+          show: calcs.nnn < 30 && params.p.toFixed(2) > calcs.acmin.toFixed(2)
+
+        - html: "`
+                  Dato che $AC_{\\\\text{min}}=${calcs.acmin}$, se il prezzo di mercato
+                  è $P=${params.p.toFixed(2)}$ abbiamo $P > AC_{\\\\text{min}}$ e quindi tutte
+                  vorranno entrare nel mercato e produrre una quantità positiva.
+                  La quantità offerta nel lungo periodo è infinita.
+                  `"
+          show: calcs.nnn >= 30 && params.p.toFixed(2) > calcs.acmin.toFixed(2)
+
+        - html: "`
+                  Dato che $AC_{\\\\text{min}}=${calcs.acmin}$, se il prezzo di mercato
+                  è $P=${params.p.toFixed(2)}$ abbiamo $P = AC_{\\\\text{min}}$ e quindi  tutte
+                  le imprese sono indifferenti tra produrre zero (stare fuori dal mercato)
+                  e entrare nel mercato e produrre la quantità $Q^{\\\\text{eff}}=100$.
+                  La quantità offerta nel lungo periodo è un qualuque multiplo di $100$
+                  compreso tra zero (nessuna decide di entrare) e ${(100)*(calcs.nnn)}
+                  (tutte decidono di entrare).
+                  `"
+          show: calcs.nnn < 30 && params.p.toFixed(2) == calcs.acmin.toFixed(2)
+
+        - html: "`
+                  Dato che $AC_{\\\\text{min}}=${calcs.acmin}$, se il prezzo di mercato
+                  è $P=${params.p.toFixed(2)}$ abbiamo $P = AC_{\\\\text{min}}$ e quindi tutte
+                  le imprese sono indifferenti tra produrre zero (stare fuori dal mercato)
+                  e entrare nel mercato e produrre la quantità $Q^{\\\\text{eff}}=100$.
+                  La quantità offerta nel lungo periodo è un qualuque multiplo di $100$.
+                  `"
+          show: calcs.nnn >= 30 && params.p.toFixed(2) == calcs.acmin.toFixed(2)
+
+
+
+
+
+
 
 
