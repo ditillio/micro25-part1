@@ -1,32 +1,36 @@
 params:
 
 - {name: a, value: 5, min: 3, max: 7, round: 1}
-- {name: b, value: 0.001}
 
 - {name: A, value: 80, min: 40, max: 100, round: 10}
 - {name: w, value: 64, min: 40, max: 80}
 - {name: p, value: 2.5, min: 0.5, max: 5, round: 0.05}
 - {name: fc, value: 100, min: 50, max: 200, round: 10}
 - {name: numimp, value: 20, min: 10, max: 40, round: 5}
+- {name: numcons, value: 1000, min: 500, max: 1500, round: 100}
 
 calcs:
 
-  tr: params.p * calcs.xopt
-  vc: (calcs.xopt)^(2) / 100
-  tc: calcs.vc + (params.fc)
-  econprofit: calcs.tr - calcs.vc
-  accprofit: calcs.tr - calcs.tc
-  mc: calcs.xopt / 50
-  avc: (calcs.xopt) / 100
-  atc: calcs.xopt / 100 + (params.fc) / calcs.xopt
+  b: (1)/(params.numcons) # abs value slope of inverse market demand
+
+  AA: (params.A)*(params.A)
+
+  ACmin: (2)*(sqrt((params.fc)*(params.w)))/(params.A)
+
+  mktsupplyslope: (2)*(params.w)/((params.numimp)*(calcs.AA))
+
+  eqQ: (params.a) / ( (calcs.mktsupplyslope) + (calcs.b) )   
+
+  eqP: (params.a)-(calcs.b)*(calcs.eqQ)
+
+  xopt: ((calcs.AA)/((2)*(params.w)))*(calcs.eqP)
 
   mktsupply: (params.numimp)*(calcs.xopt)
-  acmin: (2)*(sqrt((params.fc)*(params.w)))/(params.A)
 
-  eqQ: (params.a)/(((2)*(params.w))/((params.numimp)*((params.A)^2))+(params.b))
-  eqP: (params.a)-(params.b)*(calcs.eqQ)
-
-  xopt: ( params.A * params.A / ( 2 * params.w ) ) * calcs.eqP
+  afc: (params.fc)/(calcs.xopt) 
+  avc: ((params.w)/(calcs.AA))*(calcs.xopt) 
+  atc: (calcs.afc)+(calcs.avc)
+  mc: ((2)*(params.w)/(calcs.AA))*(calcs.xopt) 
 
 
 aspectRatio: 2
@@ -38,10 +42,10 @@ layout:
       xAxis:
         max: 210
         min: -3
-        ticks: 4
+        ticks: 0
       yAxis:
         max: 5.5
-        ticks: 10
+        ticks: 0
       label: a
 
       objects:
@@ -60,40 +64,60 @@ layout:
             r: 4
             droplines:
               vertical: calcs.xopt.toFixed(2)
-
+            strokeWidth: 0.5
 
 # price line
-        - Line:
-            yIntercept: calcs.eqP
+        - Point:
+            coordinates: [5000000, calcs.eqP]
             color: Green
-            label:
-              text: P
-              x: 210
-              position: l
-            strokeWidth: 1.5
-            bgcolor: none
+            droplines:
+              horizontal: calcs.eqP.toFixed(2)
+            strokeWidth: 1
 
 # individual supply curve
         - Curve:
             fn: ( 2 * params.w / ( params.A * params.A ) ) * (x)
             color: Red
             label:
-              text: S^{\, \text i}
+              text: S^i_{SR}
               x: 210
             strokeWidth: 2
 
 # average cost curve
         - Curve:
-            fn: ( params.fc / (x) ) + ( params.w / ( params.A * params.A ) ) * (x)
+            fn: (params.fc)/(x) + ((params.w)/(calcs.AA))*(x)
             color: Brown
             label:
               text: AC
-              x: 25
+              x: 21
             strokeWidth: 0.7
             min: 0.5
             lineStyle: dashed
 
-
+# profit / loss
+        - Area:
+            fn1: calcs.eqP
+            fn2: calcs.atc
+            fill: blue
+            opacity: 0.2
+            min: 0
+            max: calcs.xopt
+            show: calcs.eqP > calcs.ACmin
+        - Area:
+            fn1: calcs.eqP
+            fn2: calcs.atc
+            fill: red
+            opacity: 0.2
+            min: 0
+            max: calcs.xopt
+            show: calcs.eqP < calcs.ACmin
+        - Segment:
+            a: [0,calcs.atc]
+            b: [calcs.xopt,calcs.atc]
+            color: red
+            strokeWidth: 1
+            lineStyle: dotted
+            show: calcs.eqP < calcs.ACmin
 
 
 
@@ -108,7 +132,7 @@ layout:
 
     rightGraph: 
       xAxis:
-        max: 5500
+        max: 5000
         min: -3
         ticks: 0
       yAxis:
@@ -119,7 +143,7 @@ layout:
       objects:
 
         - Label:
-                coordinates: [5500, 0]
+                coordinates: [5000, 0]
                 text: "` \\\\text{kg} `"
         - Label:
                 coordinates: [0, 5.5]
@@ -136,38 +160,40 @@ layout:
             strokeWidth: 0.5
 
 
-# # price line
-#         - Line:
-#             yIntercept: params.p
-#             color: Green
-#             label:
-#               text: P
-#               x: 5000
-#               position: l
-#             strokeWidth: 1.5
-#             bgcolor: none
-#             drag:
-#               - vertical: p
+# price line
+        - Line:
+            yIntercept: calcs.eqP
+            color: Green
+            label:
+              text: P
+              x: 5000
+              position: l
+            strokeWidth: 0.5
+            bgcolor: none
+
+
+
+
 
 # market supply curve
         - Curve:
-            fn: ( 2 * params.w / ( params.A * params.A ) ) * ((x)/(params.numimp))
+            fn: ( (2)*(params.w) / ( (params.numimp)*(calcs.AA) ) ) * (x)
             color: Red
             label:
-              text: S
-              x: 5000
+              text: S_{SR}
+              x: min(5000,(params.numimp) * (5.5) / ( 2 * params.w / ( params.A * params.A ) )) 
             strokeWidth: 2
 
 # market demand curve
         - Line:
-            yIntercept: 5
-            slope: -(1)/(1000)
+            yIntercept: params.a
+            slope: -(calcs.b)
             color: Blue
             label:
               text: D
               x: 4700
             position: bl
-            strokeWidth: 2
+            strokeWidth: 1.5
 
 
 
@@ -177,8 +203,10 @@ layout:
 
     sidebar:
       controls:
-      - title: Offerta individuale e di mercato nel breve periodo
+      - title: Short-Run Competitive Equilibrium
         sliders:
+        - param: numcons
+          label: \text{num. cons.}
         - param: A
           label: A
         - param: w
@@ -186,14 +214,28 @@ layout:
         - param: fc
           label: FC
         - param: numimp
-          label: \text{num. imp.}
-        - param: p
-          label: P
+          label: \text{num. firms}
         divs:
-        - html: "` Quando $P = ${params.p.toFixed(2)}$ la quantità offerta da ciascuna delle ${params.numimp}
-                    imprese presenti sul mercato nel breve periodo è ${calcs.xopt.toFixed(2)}.
-                    La quantità offerta dal mercato è quindi ${calcs.mktsupply.toFixed(0)}.  `"
+        - html: "`  `"
 
     explanation:
       divs:
-        - html: "` bla  `"
+        - html: "` The equilibrium market price and quantity are $P=${calcs.eqP.toFixed(2)}$
+                  and $Q=${calcs.eqQ.toFixed(2)}$. Each of the ${params.numimp}
+                  firms present in the market produces ${calcs.xopt.toFixed(2)} units.
+                  The left diagram shows the corrisponding maximum profit, which can be positive
+                  (blue area) or negative (red area).   `"
+
+
+
+
+
+
+
+
+
+
+
+
+
+

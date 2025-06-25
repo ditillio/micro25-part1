@@ -4,7 +4,7 @@ params:
 - {name: w, value: 64, min: 40, max: 80}
 - {name: p, value: 3, min: 0.5, max: 5, round: 0.05}
 - {name: fc, value: 100, min: 50, max: 200, round: 10}
-- {name: n, value: 20, min: 10, max: 40, round: 5}
+- {name: numimp, value: 20, min: 10, max: 40, round: 5}
 
 calcs:
   xopt: ( params.A * params.A / ( 2 * params.w ) ) * params.p
@@ -16,12 +16,12 @@ calcs:
   mc: calcs.xopt / 50
   avc: (calcs.xopt) / 100
   atc: calcs.xopt / 100 + (params.fc) / calcs.xopt
-  mktsupply: (params.n)*(calcs.xopt)
+  mktsupply: (params.numimp)*(calcs.xopt)
   acmin: (2)*(sqrt((params.fc)*(params.w)))/(params.A)
 
   mcslope: (2)*(params.w)/((params.A)*(params.A))
   supplyslope: (1)/(calcs.mcslope)
-  mktsupplyslope: (params.n)*(calcs.supplyslope)
+  mktsupplyslope: (params.numimp)*(calcs.supplyslope)
 
 aspectRatio: 2
 
@@ -74,7 +74,7 @@ layout:
             fn: ( 2 * params.w / ( params.A * params.A ) ) * (x)
             color: Red
             label:
-              text: S^{\, \text i}
+              text: S^i_{SR}
               x: 210
             strokeWidth: 2
 
@@ -145,11 +145,11 @@ layout:
 
 # market supply curve
         - Curve:
-            fn: ( 2 * params.w / ( params.A * params.A ) ) * ((x)/(params.n))
+            fn: ( 2 * params.w / ( params.A * params.A ) ) * ((x)/(params.numimp))
             color: Red
             label:
-              text: S
-              x: min(8000,(300)*(params.n))  
+              text: S_{SR}
+              x: min(8000,(300)*(params.numimp))  
             strokeWidth: 2
 
 
@@ -167,28 +167,28 @@ layout:
           label: W
         - param: fc
           label: FC
-        - param: n
+        - param: numimp
           label: \text{num. firms}
         - param: p
           label: P
         divs:
-        - html: "` When $P = ${params.p.toFixed(2)}$, the quantity supplied by each of the ${params.n}
+        - html: "` When $P = ${params.p.toFixed(2)}$, the quantity supplied by each of the ${params.numimp}
                   firms in the short-run market is ${calcs.xopt.toFixed(2)}.
                   The total quantity supplied in the market is therefore ${calcs.mktsupply.toFixed(0)}. `"
 
     explanation:
       divs:
         - html: "`
-                The pasta market is populated in the short run by ${params.n} identical firms.
+                The pasta market is populated in the short run by ${params.numimp} identical firms.
                 The production function is $Q=${params.A}\\\\sqrt{L}$ and the wage is $W=${params.w}$.
                 The marginal cost function is therefore $MC=${calcs.mcslope.toFixed(2)}Q$.
                 From this, the individual supply function is
-                $Q=${calcs.supplyslope.toFixed(2)}P$ (curve $S^i$ in the graph on the left).
-                The total quantity supplied is equal to ${params.n} times the
+                $Q=${calcs.supplyslope.toFixed(2)}P$ (curve $S^i_{SR}$ in the graph on the left).
+                The total quantity supplied is equal to ${params.numimp} times the
                 quantity supplied by each firm. The short-run market supply function
-                (curve $S$ in the graph on the right) is therefore
+                (curve $S_{SR}$ in the graph on the right) is therefore
                 $$
-                Q=${params.n}\\\\times ${calcs.supplyslope.toFixed(2)} P
+                Q=${params.numimp}\\\\times ${calcs.supplyslope.toFixed(2)} P
                 =
                 ${calcs.mktsupplyslope.toFixed(2)} P
                 \\\\qquad\\\\text{that is}\\\\qquad

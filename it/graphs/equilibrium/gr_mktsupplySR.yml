@@ -74,7 +74,7 @@ layout:
             fn: ( 2 * params.w / ( params.A * params.A ) ) * (x)
             color: Red
             label:
-              text: S^i
+              text: S^i_{SR}
               x: 225
             strokeWidth: 2
 
@@ -148,7 +148,7 @@ layout:
             fn: ( 2 * params.w / ( params.A * params.A ) ) * ((x)/(params.numimp))
             color: Red
             label:
-              text: S
+              text: S_{SR}
               x: min(8000,(225)*(params.numimp))  
             strokeWidth: 2
 
@@ -184,11 +184,11 @@ layout:
                 La funzione di produzione è $Q=${params.A}\\\\sqrt{L}$ e il salario è $W=${params.w}$.
                 La funzione di costo marginale è quindi $MC=${calcs.mcslope.toFixed(2)}Q$.
                 Da ciò segue che la funzione di offerta individuale è
-                $Q=${calcs.supplyslope}P$ (curva $S^i$ nel grafico di sinistra).
+                $Q=${calcs.supplyslope}P$ (curva $S^i_{SR}$ nel grafico di sinistra).
                 La quantità complessivamente offerta è pari al numero di imprese, ${params.numimp},
                 moltiplicato per la
                 quantità offerta da ciascuna impresa. La funzione di offerta di
-                mercato di breve periodo (curva $S$ nel grafico di destra) è quindi
+                mercato di breve periodo (curva $S_{SR}$ nel grafico di destra) è quindi
                 $$
                 Q=${params.numimp}\\\\times ${calcs.supplyslope} P
                 =
