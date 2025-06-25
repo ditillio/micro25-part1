@@ -119,13 +119,13 @@ layout:
         - html: "` 
                     $$Q^\\\\text{eff}=A\\\\sqrt{\\\\frac{FC}{W}}
                     \\\\qquad 
-                    AC^\\\\text{min}=\\\\frac{2\\\\sqrt{FC}\\\\sqrt{W}}{A}$$ `"
+                    AC_\\\\text{min}=\\\\frac{2\\\\sqrt{FC}\\\\sqrt{W}}{A}$$ `"
         - html: "` `"
         - html: "` Dato che $A=${params.a}$, $FC=${params.fc}$ e $W=${params.w}$, abbiamo quindi `"
         - html: "` 
-                    $$Q^\\\\text{eff}=${calcs.qeff}
+                    $$Q^\\\\text{eff}=${calcs.qeff.toFixed(2)}
                     \\\\qquad 
-                    AC_\\\\text{min}=${calcs.acmin}$$ `"
+                    AC_\\\\text{min}=${calcs.acmin.toFixed(2)}$$ `"
     explanation:
       divs:
         - html: "` Come si vede dalle formule a lato del grafico (e spostando i cursori a lato del grafico), un miglioramento tecnologico 

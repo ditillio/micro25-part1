@@ -433,7 +433,8 @@ layout:
                   impresa per prezzi superiori ad esso. Se il prezzo è
                   esattamente pari al costo medio minimo, allora la quantità offerta è un 
                   multiplo della scala efficiente di produzione (i punti che formano il tratto
-                  orizzontale della curva $S^{${calcs.nnn}}_{LR}$ distano esattamente $Q^{\\\\text{eff}}$ l'uno dall'altro)
+                  orizzontale della curva $S^{${calcs.nnn}}_{LR}$ distano esattamente 
+                  $Q^{\\\\text{eff}}$ unità l'uno dall'altro)
                   `"
           show: calcs.nnn < 30
 
@@ -444,7 +445,8 @@ layout:
                   del costo medio minimo e infinita per prezzi superiori ad esso. Se il prezzo è
                   esattamente pari al costo medio minimo, allora la quantità offerta è un qualuque
                   multiplo della scala efficiente di produzione (i punti che formano il tratto
-                  orizzontale della curva S_{LR} distano esattamente $Q^{\\\\text{eff}}$ l'uno dall'altro). 
+                  orizzontale della curva $S_{LR}$ distano esattamente $Q^{\\\\text{eff}}$
+                  unità l'uno dall'altro). 
                   `"
           show: calcs.nnn >= 30
 
