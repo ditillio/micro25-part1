@@ -9,6 +9,9 @@ params:
 - {name: numimp, value: 20, min: 10, max: 40, round: 1}
 - {name: numcons, value: 1000}
 
+- {name: maxfirms, value: 0}
+
+
 calcs:
   xopt: ( params.A * params.A / ( 2 * params.w ) ) * params.p
 
@@ -295,59 +298,27 @@ layout:
 
     sidebar:
       controls:
-      - title: Equilibrio Concorrenziale di Lungo Periodo
-        sliders:
-        - param: numimp
-          label: \text{num. imp.}
+      - title: Offerta Individuale e di Mercato nel Lungo Periodo
+
+        radioGroup:
+          param: maxfirms
+          options:
+            - 10
+            - 20
+            - 40
+            - ∞
+
+        # sliders:
+        # - param: numimp
+        #   label: \text{num. imp.}
+
         divs:
-        - html: "` Quando $P = ${params.p}$ la scelta ottima della singola impresa, sia nel breve che nel lungo
-                  periodo, è produrre ${calcs.xopt.toFixed(0)} unità.  `"
-          show: (params.p > 14)
-        - html: "` Quando $P = ${params.p}$ la scelta ottima di breve periodo dell'impresa è produrre ${calcs.xopt.toFixed(0)} unità.
-                    Nel lungo periodo (se il prezzo rimane $P=${params.p}$) l'impresa è invece indifferente tra rimanere nel mercato
-                    (e produrre ${calcs.xopt.toFixed(0)} unità) e uscire dal mercato (produrre zero unità).  `"
-          show: (params.p == 14)
-        - html: "` Quando $P = ${params.p}$ la scelta ottima di breve periodo dell'impresa è produrre ${calcs.xopt.toFixed(0)} unità.
-                    La scelta ottima di lungo periodo (se il prezzo rimane $P=${params.p}$) è invece uscire dal mercato
-                    (produrre zero unità).  `"
-          show: (params.p < 14)
+        - html: "` 
+                 `"
 
 
     explanation:
       divs:
         - html: "`   `"
-          show: params.p !== 0
-        - html: "`   `"
-          show: params.p !== 0
-        - html: "`   `"
-          show: params.p !== 0
-        - html: "`   `"
-          show: params.p !== 0
-        - html: "` Dato che $ATC_{\\\\text{min}}=14$, quando $P=${params.p}$ ogni impresa presente nel mercato rimane nel
-                  mercato (e produce ${calcs.xopt} unità). Le (potenzialmente infinite) imprese non ancora presenti sul mercato
-                  hanno un incentivo a entrare e la quantità offerta sul mercato è quindi potenzialmente infinita 
-                  (aumemtare $N$ per vedere questo). `"
-          show: params.p > 14
-        - html: "` Dato che $ATC_{\\\\text{min}}=14$, quando $P=${params.p}$ ogni impresa presente nel mercato è 
-                  indifferente tra rimanere nel mercato (e produrre 40 unità) e uscire dal mercato. Le (potenzialmente infinite) 
-                  imprese non ancora presenti sul mercato sono indifferenti tra entrare nel mercato (e produrre 40 unità) e 
-                  rimanere fuori. La quantità offerta sul mercato è un qualunque multiplo di 40 (aumemtare $N$ per vedere questo). `"
-          show: params.p == 14
-        - html: "` Dato che $ATC_{\\\\text{min}}=14$, quando $P=${params.p}$ ogni impresa presente sul mercato nel lungo periodo 
-                  decide di uscire. Le imprese non ancora presenti sul mercato
-                  non hanno un incentivo a entrare. La quantità offerta sul mercato nel lungo periodo è quindi zero. `"
-          show: params.p < 14
-        - html: "`   `"
-          show: params.x == 0
-        - html: "`   `"
-          show: params.x == 0
-        - html: "`   `"
-          show: params.x == 0
-        - html: "`  `"
-          show: params.x == 0
-        - html: "`  `"
-          show: params.x == 0
-        - html: "`  `"
-          show: params.x == 0
 
 
