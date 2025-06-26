@@ -1,12 +1,13 @@
 params:
 
 - {name: p, value: 2.5, min: 1, max: 4, round: 0.5}
-- {name: q, value: 2500, min: 1000, max: 4000, round: 10}
+- {name: q, value: 2500, min: 1000, max: 4000, round: 100}
+- {name: split, value: 0}
 
 calcs:
 
   b: (1)/(params.p) # dumb calc just to have one
-
+  zz: max((5)-(params.q)/(1000),(params.q)/(1000))
 
 aspectRatio: 2
 
@@ -67,8 +68,16 @@ layout:
               horizontal: "` 2.50 `"
               vertical: 2500
             strokeWidth: 0.5
+            show: params.q == 2500 && params.p == 2.5 && params.split == 0
 
-
+        - Point:
+            coordinates: [params.q, calcs.zz]
+            color: Black
+            r: 0
+            droplines:
+              vertical: params.q
+            strokeWidth: 0.5
+            show: params.q !== 2500 || params.p !== 2.5 || params.split !== 0
 
 
 
