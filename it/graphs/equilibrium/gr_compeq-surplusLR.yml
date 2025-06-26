@@ -36,8 +36,7 @@ calcs:
 aspectRatio: 2
 
 layout:
-  TwoHorizontalGraphsPlusSidebar:
-
+  ThreeHorizontalGraphs:
 
 
 
@@ -48,7 +47,7 @@ layout:
         ticks: 0
       yAxis:
         max: 5.5
-        ticks: 10
+        ticks: 0
       label: a
 
       objects:
@@ -56,81 +55,71 @@ layout:
         - Label:
                 coordinates: [210, 0]
                 text: "` \\\\text{kg} `"
-                yPixelOffset: 0
-                xPixelOffset: -5
-                position: l
         - Label:
                 coordinates: [0, 5.5]
                 text: "` \\\\text{euro/kg}  `"
-                xPixelOffset: 0
 
-# optimal choice
-
+# points
         - Point:
-            coordinates: [0.3, calcs.acmin]
+            coordinates: [calcs.xopt, calcs.eqP]
             color: Red
-            r: 4.5
+            r: 4
             droplines:
-              vertical: 0
+              vertical: calcs.xopt.toFixed(2)
             strokeWidth: 0.5
 
-        - Point:
-            coordinates: [calcs.qeff, calcs.acmin]
-            color: Red
-            r: 4.5
-
-
 # price line
-        - Line:
-            yIntercept: calcs.acmin
+        - Point:
+            coordinates: [5000000, calcs.eqP]
             color: Green
-            label:
-              text: P
-              x: 210
-              position: l
+            droplines:
+              horizontal: calcs.eqP.toFixed(2)
             strokeWidth: 1
-            bgcolor: none
 
-# LR supply curve
+# individual supply curve
         - Curve:
             fn: ( 2 * params.w / ( params.A * params.A ) ) * (x)
             color: Red
             label:
-              text: S^i_{LR}
+              text: S^i_{SR}
               x: 210
-              position: l
-            strokeWidth: 2.5
-            min: calcs.qeff
-
-        - Segment:
-            a: [0.5,0]
-            b: [0.5,calcs.acmin]
-            color: Red
-            strokeWidth: 3
-
-
-# marginal cost curve
-        - Curve:
-            fn: ( 2 * params.w / ( params.A * params.A ) ) * (x)
-            color: Red
-            label:
-              text: MC
-              x: 50
-              position: bl
-            strokeWidth: 0.7
-            lineStyle: dashed
-
+            strokeWidth: 2
 
 # average cost curve
         - Curve:
-            fn: ( params.fc / (x) ) + ( params.w / ( params.A * params.A ) ) * (x)
+            fn: (params.fc)/(x) + ((params.w)/(calcs.AA))*(x)
             color: Brown
             label:
               text: AC
-              x: 27
+              x: 21
             strokeWidth: 0.7
             min: 0.5
             lineStyle: dashed
+
+# profit / loss
+        - Area:
+            fn1: calcs.eqP
+            fn2: calcs.atc
+            fill: blue
+            opacity: 0.2
+            min: 0
+            max: calcs.xopt
+            show: calcs.eqP > calcs.ACmin
+        - Area:
+            fn1: calcs.eqP
+            fn2: calcs.atc
+            fill: red
+            opacity: 0.2
+            min: 0
+            max: calcs.xopt
+            show: calcs.eqP < calcs.ACmin
+        - Segment:
+            a: [0,calcs.atc]
+            b: [calcs.xopt,calcs.atc]
+            color: red
+            strokeWidth: 1
+            lineStyle: dotted
+            show: calcs.eqP < calcs.ACmin
 
 # Qeff & ACmin
         - Point:
@@ -157,6 +146,81 @@ layout:
             xPixelOffset: -75
             position: c
             color: Blue
+
+
+
+
+
+
+
+
+
+
+
+    middleGraph: 
+      xAxis:
+        max: 5000
+        min: -3
+        ticks: 0
+      yAxis:
+        max: 5.5
+        ticks: 0
+      label: a
+
+      objects:
+
+        - Label:
+                coordinates: [5000, 0]
+                text: "` \\\\text{kg} `"
+        - Label:
+                coordinates: [0, 5.5]
+                text: "` \\\\text{euro/kg}  `"
+
+# points
+        - Point:
+            coordinates: [calcs.eqQ, calcs.eqP]
+            color: Green
+            r: 4
+            droplines:
+              horizontal: calcs.eqP.toFixed(2)
+              vertical: calcs.eqQ.toFixed(2)
+            strokeWidth: 0.5
+
+
+# price line
+        - Line:
+            yIntercept: calcs.eqP
+            color: Green
+            label:
+              text: P
+              x: 5000
+              position: l
+            strokeWidth: 0.5
+            bgcolor: none
+
+
+
+
+
+# market supply curve
+        - Curve:
+            fn: ( (2)*(params.w) / ( (params.numimp)*(calcs.AA) ) ) * (x)
+            color: Red
+            label:
+              text: S_{SR}
+              x: min(5000,(params.numimp) * (5.5) / ( 2 * params.w / ( params.A * params.A ) )) 
+            strokeWidth: 2
+
+# market demand curve
+        - Line:
+            yIntercept: params.a
+            slope: -(calcs.b)
+            color: Blue
+            label:
+              text: D
+              x: 4700
+            position: bl
+            strokeWidth: 1.5
 
 
 
@@ -243,6 +307,22 @@ layout:
 
 
 
+    leftControls:
+      title: Singola Impresa
+      divs:
+      - html: "` La funzione di utilità di Alice è $U=XY$. `"
+
+
+    middleControls:
+      title: Mercato (Equilibrio di Breve Periodo con 20 Imprese)
+      divs:
+      - html: "` La funzione di utilità di Alice è $U=XY$. `"
+
+
+    rightControls:
+      title: Mercato (Equilibrio di Lungo Periodo con 30 imprese)
+      divs:
+      - html: "` La funzione di utilità di Alice è $U=XY$. `"
 
 
 
@@ -257,28 +337,14 @@ layout:
 
 
 
-
-
-    sidebar:
-      controls:
-      - title: Equilibrio concorrenziale di lungo periodo
-        sliders:
-        - param: numcons
-          label: \text{num. cons.}
-        - param: A
-          label: A
-        - param: w
-          label: W
-        - param: fc
-          label: FC
-        # - param: numimp
-        #   label: \text{num. imp.}
-        divs:
-        - html: "`  `"
 
     explanation:
       divs:
-        - html: "` 
+        - html: "`
+                Il grafico di sinistra rappresenta l'equilibrio di breve periodo quando 
+                nel mercato sono presenti 20 imprese. La quantità scmbiata è pari a 2500
+                unità. Ogni impresa produce quindi 125 unità. Dato questo numero di imprese,
+                il mercato non può fare di meglio.
                 `"
 
 
