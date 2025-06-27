@@ -2,7 +2,7 @@ params:
 
 - {name: a, value: 5, min: 3, max: 7, round: 1}
 
-- {name: A, value: 80, min: 40, max: 100, round: 10}
+- {name: A, value: 80, min: 40, max: 110, round: 10}
 - {name: w, value: 64, min: 40, max: 80}
 - {name: p, value: 2.5, min: 0.5, max: 5, round: 0.05}
 - {name: fc, value: 100, min: 50, max: 200, round: 10}
@@ -215,9 +215,9 @@ layout:
           label: FC
         - param: numimp
           label: \text{num. imp.}
-        # divs:
-        # - html: "` Profit = $( ${calcs.eqP} - ${calcs.atc} ) \\\\times ${calcs.xopt}$
-        #                  $=$ $ ${((calcs.eqP)-(calcs.atc))*(calcs.xopt)} $`"
+        divs:
+        - html: "` Profit = $( ${calcs.eqP} - ${calcs.atc} ) \\\\times ${calcs.xopt}$
+                         $=$ $ ${((calcs.eqP)-(calcs.atc))*(calcs.xopt)} $`"
 
     explanation:
       divs:
