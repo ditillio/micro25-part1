@@ -319,9 +319,10 @@ layout:
       divs:
       - html: "` Prezzo di equilibrio: $8$ `"
       - html: "` Quantità di equilibrio: $4$ `"
-      - html: "` Surplus  consumatore: $8$ `"
-      - html: "` Surplus produttore: $16$ `"
-      - html: "` Surplus totale: $24$ `"
+      - html: "` Surplus (in migliaia di euro): `"
+      - html: "` $\\\\quad$ Consumatore: $8$ `"
+      - html: "` $\\\\quad$ Produttore: $16$ `"
+      - html: "` $\\\\quad$ Totale: $24$ `"
 
       # sliders:
       #   - param: q
@@ -332,9 +333,10 @@ layout:
       divs:
       - html: "` Prezzo di equilibrio: $6$ `"
       - html: "` Quantità di equilibrio: $6$ `"
-      - html: "` Surplus  consumatore: $18$ `"
-      - html: "` Surplus produttore: $18$ `"
-      - html: "` Surplus totale: $36$ `"
+      - html: "` Surplus (in migliaia di euro): `"
+      - html: "` $\\\\quad$ Consumatore: $18$ `"
+      - html: "` $\\\\quad$ Produttore: $18$ `"
+      - html: "` $\\\\quad$ Totale: $36$ `"
 
       # checkboxes:
       # - param: split
@@ -345,9 +347,10 @@ layout:
       divs:
       - html: "` Prezzo di equilibrio: $4$ `"
       - html: "` Quantità di equilibrio: $8$ `"
-      - html: "` Surplus  consumatore: $32$ `"
-      - html: "` Surplus produttore: $16$ `"
-      - html: "` Surplus totale: $48$ `"
+      - html: "` Surplus (in migliaia di euro): `"
+      - html: "` $\\\\quad$ Consumatore: $32$ `"
+      - html: "` $\\\\quad$ Produttore: $16$ `"
+      - html: "` $\\\\quad$ Totale: $48$ `"
 
 
 
