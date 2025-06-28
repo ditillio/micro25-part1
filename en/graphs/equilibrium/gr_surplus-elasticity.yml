@@ -15,67 +15,65 @@ layout:
 
 
 
-
     leftGraph: 
       xAxis:
-        max: 14
+        max: 11
         ticks: 0
       yAxis:
-        max: 14
+        max: 11
         ticks: 0
       label: a
 
       objects:
 
         - Label:
-                coordinates: [14, 0]
+                coordinates: [11, 0]
                 text: "` \\\\text{t} `"
         - Label:
-                coordinates: [0, 14]
+                coordinates: [0, 11]
                 text: "` \\\\text{euro/kg}  `"
 
 # demand
         - Line:
-            point: [0,12]
+            point: [0,10]
             slope: -(1)
             color: Blue
             label:
               text: D
-              x: 12
+              x: 10
               position: b
               bgcolor: none
             strokeWidth: 2
         - Point:
-            coordinates: [0, 12]
+            coordinates: [0, 10]
             color: Blue
             r: 0
             droplines:
-              horizontal: "` 12 `"
+              horizontal: "` 10 `"
         - Point:
-            coordinates: [12, 0]
+            coordinates: [10, 0]
             color: Blue
             r: 0
             droplines:
-              vertical: "` 12 `"
+              vertical: "` 10 `"
 
 # supply
         - Line:
             point: [0,0]
-            slope: (2)
+            slope: (4)
             color: Red
-            max: 6
             label:
               text: S_{SR}
-              x: 6
+              x: 2.8
             strokeWidth: 2
 
 # consumer surplus
         - Area:
-            fn1: (12)-(x)
+            fn1: (10)-(x)
             fn2: (8)
             fill: blue
             min: 0
-            max: 4
+            max: 2
 
         # - Segment:
         #     a: [0,2.5]
@@ -87,19 +85,19 @@ layout:
 # producer surplus
         - Area:
             fn1: (8)
-            fn2: (2)*(x)
+            fn2: (4)*(x)
             fill: green
             min: 0
-            max: 4
+            max: 2
 
 # equilibrium
         - Point:
-            coordinates: [4, 8]
+            coordinates: [2, 8]
             color: Green
             r: 4
             droplines:
               horizontal: "` 8 `"
-              vertical: "` 4 `"
+              vertical: "` 2 `"
             strokeWidth: 0.5
 
 
@@ -116,62 +114,62 @@ layout:
 
     middleGraph: 
       xAxis:
-        max: 14
+        max: 11
         ticks: 0
       yAxis:
-        max: 14
+        max: 11
         ticks: 0
       label: a
 
       objects:
 
         - Label:
-                coordinates: [14, 0]
+                coordinates: [11, 0]
                 text: "` \\\\text{t} `"
         - Label:
-                coordinates: [0, 14]
+                coordinates: [0, 11]
                 text: "` \\\\text{euro/kg}  `"
 
 # demand
         - Line:
-            point: [0,12]
+            point: [0,10]
             slope: -(1)
             color: Blue
             label:
               text: D
-              x: 12
+              x: 10
               position: b
               bgcolor: none
             strokeWidth: 2
         - Point:
-            coordinates: [0, 12]
+            coordinates: [0, 10]
             color: Blue
             r: 0
             droplines:
-              horizontal: "` 12 `"
+              horizontal: "` 10 `"
         - Point:
-            coordinates: [12, 0]
+            coordinates: [10, 0]
             color: Blue
             r: 0
             droplines:
-              vertical: "` 12 `"
+              vertical: "` 10 `"
 
 # supply
         - Line:
             point: [0,0]
-            slope: (1)
+            slope: (2/3)
             color: Red
-            max: 12
+            max: 10
             label:
               text: S_{SR}
-              x: 12
+              x: 10
               position: c
             strokeWidth: 2
 
 # consumer surplus
         - Area:
-            fn1: (12)-(x)
-            fn2: (6)
+            fn1: (10)-(x)
+            fn2: (4)
             fill: blue
             min: 0
             max: 6
@@ -185,19 +183,19 @@ layout:
 
 # producer surplus
         - Area:
-            fn1: (6)
-            fn2: (1)*(x)
+            fn1: (4)
+            fn2: (2/3)*(x)
             fill: green
             min: 0
             max: 6
 
 # equilibrium
         - Point:
-            coordinates: [6, 6]
+            coordinates: [6, 4]
             color: Green
             r: 4
             droplines:
-              horizontal: "` 6 `"
+              horizontal: "` 4 `"
               vertical: "` 6 `"
             strokeWidth: 0.5
 
@@ -220,60 +218,61 @@ layout:
 
     rightGraph: 
       xAxis:
-        max: 14
+        max: 11
         ticks: 0
       yAxis:
-        max: 14
+        max: 11
         ticks: 0
       label: a
 
       objects:
 
         - Label:
-                coordinates: [14, 0]
+                coordinates: [11, 0]
                 text: "` \\\\text{t} `"
         - Label:
-                coordinates: [0, 14]
+                coordinates: [0, 11]
                 text: "` \\\\text{euro/kg}  `"
 
 # demand
         - Line:
-            point: [0,12]
+            point: [0,10]
             slope: -(1)
             color: Blue
             label:
               text: D
-              x: 12
+              x: 10
               position: b
               bgcolor: none
             strokeWidth: 2
         - Point:
-            coordinates: [0, 12]
+            coordinates: [0, 10]
             color: Blue
             r: 0
             droplines:
-              horizontal: "` 12 `"
+              horizontal: "` 10 `"
         - Point:
-            coordinates: [12, 0]
+            coordinates: [10, 0]
             color: Blue
             r: 0
             droplines:
-              vertical: "` 12 `"
+              vertical: "` 10 `"
 
 # supply
         - Line:
             point: [0,0]
-            slope: (0.5)
+            slope: (0.25)
             color: Red
+            max: 10
             label:
               text: S_{SR}
-              x: 14
+              x: 10
             strokeWidth: 2
 
 # consumer surplus
         - Area:
-            fn1: (12)-(x)
-            fn2: (4)
+            fn1: (10)-(x)
+            fn2: (2)
             fill: blue
             min: 0
             max: 8
@@ -287,21 +286,22 @@ layout:
 
 # producer surplus
         - Area:
-            fn1: (4)
-            fn2: (0.5)*(x)
+            fn1: (2)
+            fn2: (0.25)*(x)
             fill: green
             min: 0
             max: 8
 
 # equilibrium
         - Point:
-            coordinates: [8, 4]
+            coordinates: [8, 2]
             color: Green
             r: 4
             droplines:
-              horizontal: "` 4 `"
+              horizontal: "` 2 `"
               vertical: "` 8 `"
             strokeWidth: 0.5
+
 
 
 
@@ -318,10 +318,10 @@ layout:
       title: Technology I
       divs:
       - html: "` Equilibrium Price: $8$ `"
-      - html: "` Equilibrium Quantity: $4$ `"
-      - html: "` Consumer Surplus: $8$ `"
-      - html: "` Producer Surplus: $16$ `"
-      - html: "` Total Surplus: $24$ `"
+      - html: "` Equilibrium Quantity: $2$ `"
+      - html: "` Consumer Surplus: $2$ `"
+      - html: "` Producer Surplus: $8$ `"
+      - html: "` Total Surplus: $10$ `"
 
       # sliders:
       #   - param: q
@@ -330,11 +330,11 @@ layout:
     middleControls:
       title: Technology II
       divs:
-      - html: "` Equilibrium Price: $6$ `"
+      - html: "` Equilibrium Price: $4$ `"
       - html: "` Equilibrium Quantity: $6$ `"
       - html: "` Consumer Surplus: $18$ `"
-      - html: "` Producer Surplus: $18$ `"
-      - html: "` Total Surplus: $36$ `"
+      - html: "` Producer Surplus: $12$ `"
+      - html: "` Total Surplus: $30$ `"
 
       # checkboxes:
       # - param: split
@@ -343,11 +343,11 @@ layout:
     rightControls:
       title: Technology III
       divs:
-      - html: "` Equilibrium Price: $4$ `"
+      - html: "` Equilibrium Price: $2$ `"
       - html: "` Equilibrium Quantity: $8$ `"
       - html: "` Consumer Surplus: $32$ `"
-      - html: "` Producer Surplus: $16$ `"
-      - html: "` Total Surplus: $48$ `"
+      - html: "` Producer Surplus: $8$ `"
+      - html: "` Total Surplus: $40$ `"
 
 
 
