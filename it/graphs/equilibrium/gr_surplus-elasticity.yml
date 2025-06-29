@@ -367,7 +367,7 @@ layout:
 
     explanation:
       divs:
-        - html: "` `"
+        - html: <br>
         # - html: "`
         #         Il grafico di sinistra rappresenta l'equilibrio di breve periodo quando 
         #         nel mercato sono presenti 20 imprese. La quantità scmbiata è pari a 2500
