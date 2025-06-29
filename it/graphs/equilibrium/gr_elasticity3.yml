@@ -1,11 +1,12 @@
 params:
 
-- {name: split, value: 0}
+- {name: p, value: 5, min: 2, max: 9}
 
 calcs:
 
-  zz: params.split
-
+  q1: ((50)-(5)*(params.p))/((2)*(params.p))
+  q2: (15)/(params.p)
+  q3: (10)-(params.p)
 
 # aspectRatio: 2
 
@@ -52,11 +53,13 @@ layout:
             droplines:
               horizontal: "` 10 `"
         - Point:
-            coordinates: [10, 0]
+            coordinates: [calcs.q1, params.p]
             color: Blue
-            r: 0
+            r: 3.5
             droplines:
-              vertical: "` 10 `"
+              horizontal: params.p.toFixed(1)
+              vertical: calcs.q1.toFixed(2)
+            strokeWidth: 0.5
 
 # # expenditure
 #         - Area:
@@ -107,6 +110,15 @@ layout:
               position: b
               bgcolor: none
             strokeWidth: 2
+
+        - Point:
+            coordinates: [calcs.q2, params.p]
+            color: Blue
+            r: 3.5
+            droplines:
+              horizontal: params.p.toFixed(1)
+              vertical: calcs.q2.toFixed(2)
+            strokeWidth: 0.5
 
 # # expenditure
 #         - Area:
@@ -167,11 +179,13 @@ layout:
             droplines:
               horizontal: "` 10 `"
         - Point:
-            coordinates: [10, 0]
+            coordinates: [calcs.q3, params.p]
             color: Blue
-            r: 0
+            r: 3.5
             droplines:
-              vertical: "` 10 `"
+              horizontal: params.p.toFixed(1)
+              vertical: calcs.q3.toFixed(2)
+            strokeWidth: 0.5
 
 # # expenditure
 #         - Area:
